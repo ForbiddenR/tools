@@ -2,6 +2,20 @@ package safemap
 
 import "sync"
 
+var myPool Pool
+
+func Set(id string) error {
+	return myPool.Set(id)
+}
+
+func IsExist(id string) bool {
+	return myPool.IsExist(id)
+}
+
+func Delete(id string) error {
+	return myPool.Delete(id)
+}
+
 type value struct{}
 
 type Pool interface {
@@ -15,8 +29,8 @@ type pool struct {
 	connections map[string]struct{}
 }
 
-func NewDefaultPool() Pool {
-	return &pool{
+func InitDefaultPool() {
+	myPool = &pool{
 		connections: make(map[string]struct{}),
 	}
 }
