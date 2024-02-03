@@ -12,12 +12,12 @@ type Pool interface {
 
 type pool struct {
 	rw          sync.RWMutex
-	connections map[string]any
+	connections map[string]struct{}
 }
 
 func NewDefaultPool() Pool {
 	return &pool{
-		connections: make(map[string]any),
+		connections: make(map[string]struct{}),
 	}
 }
 
